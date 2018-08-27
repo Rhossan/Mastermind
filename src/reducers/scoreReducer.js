@@ -1,5 +1,5 @@
 
-import {RECEIVE_NEW_SCORE} from './actions/scoreReducer';
+import {RECEIVE_NEW_SCORE} from '../actions/scoreActions';
 import merge from 'lodash/merge';
 
 const guessesReducer = (state = {}, action) => {

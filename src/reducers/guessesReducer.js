@@ -1,4 +1,4 @@
-import {RECEIVE_NEW_GUESS} from './actions/guessesActions';
+import {RECEIVE_NEW_GUESS} from '../actions/guessesActions';
 import merge from 'lodash/merge';
 
 const guessesReducer = (state = {}, action) => {
@@ -7,9 +7,8 @@ const guessesReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_NEW_GUESS:
     newState = merge({}, state);
-    newState.push(action.guess);
+    newState.pegs.push(action.guess);
     return newState;
-      break;
     default:
     return state;
   }
