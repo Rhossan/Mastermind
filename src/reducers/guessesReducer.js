@@ -6,9 +6,10 @@ const guessesReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_NEW_GUESS:
-    newState = merge({}, state);
-    newState.pegs.push(action.guess);
-    return newState;
+      newState = merge({}, state);
+      newState.slots.push(action.guess.slot);
+      newState.pegs.push(action.guess.peg);
+      return newState;
     default:
     return state;
   }

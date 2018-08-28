@@ -1,13 +1,26 @@
 import React from "react";
 import GuessForm from './guessForm'
+import EndGameModal from './endGameModal'
 import { StyleSheet, css } from "aphrodite";
+import {Button} from 'semantic-ui-react';
 
 class Game extends React.Component{
   constructor(props) {
       super(props);
+      this.submit = this.submit.bind(this);
     }
+
+    componentDidMount = () => {
+
+    }
+
+    submit = (e) => {
+      e.preventDefault();
+      this.props.postNewAnswer();
+    }
+
   render() {
-    const guesses = this.props.guesses.pegs.map(guess => {
+    const guesses = this.props.guesses.slots.map(guess => {
       return guess ?
       <div>
         {guess[0]}
@@ -21,6 +34,7 @@ class Game extends React.Component{
       <div>
         <div><GuessForm props={this.props}/></div>
         {guesses}
+        <Button secondary onClick={this.submit}>Reset</Button>
       </div>
     )
   }

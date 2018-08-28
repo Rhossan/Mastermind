@@ -29,9 +29,38 @@ class GuessForm extends React.Component {
     })
   }
 
+  determinePegs = (slot) => {
+    debugger
+    let copySlot = slot.slice();
+    let copyAnswer = this.props.props.answer.slice();
+    let arr = [];
+    let correctLocations = 0;
+    for (let i = 0; i < copySlot.length; i++) {
+      if(copySlot[i] === (copyAnswer[i]).toString()) {
+        copySlot.splice(i,1);
+        copyAnswer.splice(i,1);
+        arr.push(2);
+      }
+    }
+    for (let i = 0; i < copySlot.length; i++) {
+      if(copySlot.indexOf(copyAnswer[i].toString()) != -1) {
+        arr.push(1);
+      }
+    }
+
+    while(arr.length < 4){
+      arr.push(0);
+    }
+    return arr;
+  }
+
   submit = (e) => {
     e.preventDefault();
-    this.props.props.postNewGuess(this.state.value);
+    const pegs = this.determinePegs(this.state.value)
+    this.props.props.postNewGuess({
+      slot: this.state.value,
+      peg: pegs
+    });
     this.resetState();
   }
 
