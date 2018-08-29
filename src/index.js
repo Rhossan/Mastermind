@@ -9,6 +9,8 @@ import configureStore  from './store/store';
 import { HashRouter } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 
+import fire from './fire';
+
 const store = configureStore();
 window.dispatch = store.dispatch;
 window.getState = store.getState;

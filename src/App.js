@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
 // import Header from './header/header';
 import gameContainer from './components/gameContainer';
-import leaderboardContainer from './components/leaderboardContainer';
+import LeaderBoard from './components/leaderBoard';
 import './App.css';
+
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
       <div>
           <Switch>
             <Route exact path='/' component={gameContainer}/>
+            <Route exact path='/leaderboard' component={LeaderBoard}/>
           </Switch>
       </div>
     );

@@ -1,6 +1,6 @@
 
-<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
-<script>
+import firebase from 'firebase';
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAKVJzqMdvi1v_3zwr52dAGUAAGTc_Pxc0",
@@ -10,5 +10,5 @@
     storageBucket: "mastermind-2ccf3.appspot.com",
     messagingSenderId: "664135201756"
   };
-  firebase.initializeApp(config);
-</script>
+  var fire = firebase.initializeApp(config);
+  export default fire;

@@ -4,17 +4,24 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import rootReducer from '../reducers/rootReducer';
 
+const determineAnswer = () => {
+  let arr = [];
+  while (arr.length < 4){
+    let rand = Math.floor(Math.random() * 10);
+    if (arr.indexOf(rand) === -1){
+      arr.push(rand);
+    }
+  }
+  return arr;
+}
+
 const preloadedState = {
   guesses:
     {
       slots:[],
       pegs: []
     },
-  answer:
-    [Math.floor(Math.random() * 10),
-     Math.floor(Math.random() * 10),
-     Math.floor(Math.random() * 10),
-     Math.floor(Math.random() * 10)],
+  answer: determineAnswer(),
   score: 1
 }
 
