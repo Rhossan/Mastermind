@@ -7,27 +7,13 @@ class LeaderBoardModal extends React.Component {
   constructor(props){
     super(props);
     this.state = { scores: [] };
-    this.displayHighScores = this.displayHighScores.bind(this);
   }
-
-  displayHighScores = (highScores) => {
-    const scores = Object.keys(highScores)
-    .map(el => parseInt(el))
-    .sort((a,b) => a - b);
-  }
-
-  // retrieveHighScores = () => {
-  //   fire.database().ref('/scores/').once('value').then( snap => {
-  //     let highScores = snap.val();
-  //     displayHighScores(highScores);
-  //   });
-  // };
 
   componentWillMount = () => {
 
     let scoresRef = fire.database().ref('/scores/').orderByKey().limitToLast(10);
     scoresRef.on('child_added', snapshot => {
-      let score = { username: snapshot.val(), score: snapshot.key };
+      let score = { username: snapshot.val(), score: snapshot.key[0] };
       this.setState({ scores: [score].concat(this.state.scores) });
     })
   }
@@ -35,17 +21,11 @@ class LeaderBoardModal extends React.Component {
 
   render = () => {
 
-
-    //   return scores ?
-    //   <div>
-    //     {score[0]}
-    //     {score[1]}
-    //     {score[2]}
-    //     {score[3]}
-    //   </div> : ''
-    // })
-    //<p>{score.username} has a score of {score.score[0]}</p>
-    const scores = this.state.scores.map((score,idx) => {
+    let scores = this.state.scores.sort((a,b) => {
+      return a.score[0] - b.score[0];
+    })
+    debugger
+    scores = scores.map((score,idx) => {
       return (
         <Table.Row>
           <Table.Cell>{idx + 1}</Table.Cell>
@@ -56,7 +36,7 @@ class LeaderBoardModal extends React.Component {
     });
 
     return (
-      <Modal trigger={<Button>LeaderBoard</Button>} centered={false}>
+      <Modal trigger={<Button color='pink'>LeaderBoard</Button>} centered={false}>
         <Header icon='users' content='Mastermind LeaderBoard!' />
         <Modal.Content>
           <div className={css(styles.tableContainer)}>

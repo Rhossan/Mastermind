@@ -22,7 +22,7 @@ const preloadedState = {
       pegs: []
     },
   answer: determineAnswer(),
-  score: 1
+  score: 0
 }
 
 const configureStore = () => {

@@ -6,23 +6,20 @@ import BlackSquare from "../assets/black-square.png";
 import RedSquare from "../assets/red-square.png";
 
 import { StyleSheet, css } from "aphrodite";
-import { Button, Header, Icon, Image, Table, Label, Form, Modal } from 'semantic-ui-react'
+import { Button, Divider, Header, Icon, Image, Table, Label, Form, Modal } from 'semantic-ui-react'
 
 
 class Game extends React.Component{
   constructor(props) {
       super(props);
-      this.submit = this.submit.bind(this);
+      this.resetGame = this.resetGame.bind(this);
       this.mapEachTurn = this.mapEachTurn.bind(this);
       this.getLabel = this.getLabel.bind(this);
       this.getPegLabels = this.getPegLabels.bind(this);
     }
 
-    componentDidMount = () => {
 
-    }
-
-    submit = (e) => {
+    resetGame = (e) => {
       e.preventDefault();
       this.props.postNewAnswer();
     }
@@ -75,22 +72,9 @@ class Game extends React.Component{
     }
   render() {
     const {slots, pegs} = this.props.guesses;
-    // const guesses = slots.map(guess => {
-    //   return guess ?
-    //   <div>
-    //     {guess[0]}
-    //     {guess[1]}
-    //     {guess[2]}
-    //     {guess[3]}
-    //   </div> : ''
-    // })
-
-
 
     let mappings = this.mapEachTurn();
-    // <Label circular color={colorSlots[]} key={color}>
-    //   {guess.slot.join(" ")}
-    // </Label>
+
     const guesses = mappings.map((guess, idx) => {
       return (
         <Table.Row>
@@ -104,9 +88,8 @@ class Game extends React.Component{
         </Table.Row>
       );
     });
-    const winnerModal = JSON.stringify(pegs[pegs.length-1]) === JSON.stringify([2,2,2,2]) ?
-      <EndGameModal props={this.props}/> : ''
-    //
+
+    const winner =  JSON.stringify(pegs[pegs.length-1]) === JSON.stringify([2,2,2,2]);
     return (
       <div>
 
@@ -133,11 +116,14 @@ class Game extends React.Component{
       </Table>
   </div>
 
-        <div><GuessForm props={this.props}/></div>
+        <div className={css(styles.formContainer)}>
+          <GuessForm props={this.props}/>
+          <Divider horizontal>More Options</Divider>
+            <Button secondary onClick={this.resetGame}>Reset</Button>
+            <EndGameModal props={this.props} isWinner={winner}/>
+            <LeaderBoardModal/>
+          </div>
 
-        <Button secondary onClick={this.submit}>Reset</Button>
-        {winnerModal}
-        <LeaderBoardModal />
       </div>
     )
   }
@@ -185,11 +171,13 @@ const styles = StyleSheet.create({
     marginTop: '50px',
     marginLeft: '100px',
     marginRight: '100px'
-  }
+  },
+    formContainer: {
+    marginTop: '50px',
+    marginLeft: '100px',
+    marginRight: '100px'
+}
 
 });
 
 export default Game;
-// guesses go lines 81 and 87
-// we will render all guesses here, and then
-// guessform as the last thing, guessform will have submit button

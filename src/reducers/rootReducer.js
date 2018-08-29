@@ -11,5 +11,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-
-  //scoreBoard: scoreBoardReducer

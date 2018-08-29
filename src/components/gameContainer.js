@@ -2,7 +2,6 @@ import {connect} from 'react-redux';
 import Game from './game';
 import {postNewGuess} from '../actions/guessesActions';
 import {postNewAnswer} from '../actions/answerActions';
-// import {receiveNewScore} from '../actions/activityActions';
 
 const mapStateToProps = (state) => {
   return {

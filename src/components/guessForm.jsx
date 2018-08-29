@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Dropdown } from 'semantic-ui-react';
+import { Button, Dropdown, Divider } from 'semantic-ui-react';
+
+import { StyleSheet, css } from "aphrodite";
 
 class GuessForm extends React.Component {
   constructor(props) {
@@ -7,18 +9,12 @@ class GuessForm extends React.Component {
     this.state = {
       value: []
     };
-  // this.handleSubmit = this.handleSubmit.bind(this);
   this.update = this.update.bind(this);
   this.submit = this.submit.bind(this);
   this.resetState = this.resetState.bind(this);
   }
 
-  // update = (e) => {
-  //         this.setState({value: [...this.state.value,e.target.value]});
-  //         console.log('Dropdown changed');
-  //         return;
-  //     }
-  //
+
   update = (e, { value }) => {
     this.setState({ value });
   }
@@ -84,12 +80,14 @@ class GuessForm extends React.Component {
     return(
       <div>
         <Dropdown
-         placeholder='Select'
+         placeholder='Click Here'
          name="number"
          onChange={this.update}
          fluid multiple selection
+         maxLength="4"
          options={options}
          value={this.state.value} />
+       <Divider horizontal>----</Divider>
        <Button primary onClick={this.submit}>Guess</Button>
       </div>
     );
