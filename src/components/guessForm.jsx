@@ -47,9 +47,9 @@ class GuessForm extends React.Component {
       }
     }
 
-    while(arr.length < 4){
-      arr.push(0);
-    }
+    // while(arr.length < 4){
+    //   arr.push(0);
+    // }
     return arr;
   }
 

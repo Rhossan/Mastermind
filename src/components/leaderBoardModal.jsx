@@ -3,7 +3,7 @@ import { Button, Header, Icon, Image, Table, Label, Form, Modal } from 'semantic
 import fire from '../fire';
 import { StyleSheet, css } from 'aphrodite';
 
-class LeaderBoard extends React.Component {
+class LeaderBoardModal extends React.Component {
   constructor(props){
     super(props);
     this.state = { scores: [] };
@@ -24,10 +24,9 @@ class LeaderBoard extends React.Component {
   // };
 
   componentWillMount = () => {
-    debugger
+
     let scoresRef = fire.database().ref('/scores/').orderByKey().limitToLast(10);
     scoresRef.on('child_added', snapshot => {
-      /* Update React state when message is added at Firebase Database */
       let score = { username: snapshot.val(), score: snapshot.key };
       this.setState({ scores: [score].concat(this.state.scores) });
     })
@@ -57,7 +56,9 @@ class LeaderBoard extends React.Component {
     });
 
     return (
-
+      <Modal trigger={<Button>LeaderBoard</Button>} centered={false}>
+        <Header icon='users' content='Mastermind LeaderBoard!' />
+        <Modal.Content>
           <div className={css(styles.tableContainer)}>
         <div>
           <Header as='h2' icon textAlign='center'>
@@ -80,7 +81,14 @@ class LeaderBoard extends React.Component {
           </Table.Body>
         </Table>
     </div>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button basic color='red' inverted>
+            <Icon name='remove' /> Close
+          </Button>
 
+        </Modal.Actions>
+      </Modal>
     )
   }
 }
@@ -93,4 +101,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LeaderBoard;
+export default LeaderBoardModal;
