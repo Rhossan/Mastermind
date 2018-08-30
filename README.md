@@ -1,5 +1,4 @@
 # Mastermind
-## [Live](http://brianliew.com/SquareBoi/)
 
 [Live](https://mastermind-2ccf3.firebaseapp.com)
 
