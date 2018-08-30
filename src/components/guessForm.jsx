@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Dropdown, Divider } from 'semantic-ui-react';
+import TutorialModal from "./tutorialModal";
 
 import { StyleSheet, css } from "aphrodite";
 
@@ -16,7 +17,7 @@ class GuessForm extends React.Component {
 
 
   update = (e, { value }) => {
-    this.setState({ value });
+      this.setState({ value });
   }
 
   resetState = () => {
@@ -43,21 +44,23 @@ class GuessForm extends React.Component {
       }
     }
 
-    // while(arr.length < 4){
-    //   arr.push(0);
-    // }
     return arr;
   }
 
   submit = (e) => {
     e.preventDefault();
-    const pegs = this.determinePegs(this.state.value)
-    this.props.props.postNewGuess({
-      slot: this.state.value,
-      peg: pegs
-    });
-    // this.props.props.postNewAnswer();
-    this.resetState();
+    if(this.state.value.length != 4){
+      
+    }
+    else{
+      const pegs = this.determinePegs(this.state.value)
+      this.props.props.postNewGuess({
+        slot: this.state.value,
+        peg: pegs
+      });
+      this.resetState();
+    }
+
   }
 
   getOptions = () => {
@@ -84,11 +87,11 @@ class GuessForm extends React.Component {
          name="number"
          onChange={this.update}
          fluid multiple selection
-         maxLength="4"
          options={options}
          value={this.state.value} />
        <Divider horizontal>----</Divider>
        <Button primary onClick={this.submit}>Guess</Button>
+       <TutorialModal />
       </div>
     );
   }

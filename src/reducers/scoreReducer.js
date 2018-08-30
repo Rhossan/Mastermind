@@ -9,8 +9,6 @@ const scoreReducer = (state = 0, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_NEW_GUESS:
-      // newState = merge({}, state);
-      // state+=1;
       return state + 1;
     case RECEIVE_NEW_ANSWER:
       state = 0;

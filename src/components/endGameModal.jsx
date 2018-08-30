@@ -6,8 +6,7 @@ class EndGameModal extends React.Component{
   constructor(props) {
       super(props);
       this.state = {
-        username: '',
-        isWinner: ''
+        username: ''
       };
       this.update = this.update.bind(this);
       this.writeScore = this.writeScore.bind(this);
@@ -32,6 +31,7 @@ class EndGameModal extends React.Component{
 
     render = () => {
       return (
+        <div>
         <Modal open={this.props.isWinner} basic size='small'>
           <Header icon='winner' content='Mastermind Champ!' />
           <Modal.Content>
@@ -48,6 +48,21 @@ class EndGameModal extends React.Component{
             </Form>
           </Modal.Actions>
         </Modal>
+
+        <Modal open={this.props.isLoser} basic size='small'>
+          <Header icon='time' content='Game Over..' />
+          <Modal.Content>
+            <p>
+              Sorry you couldn't win. But dont fret! With enough practice you'll be a mastermind champ!
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Form>
+              <Form.Button color='black' inverted onClick= {this.resetGame}>Start New Game</Form.Button>
+            </Form>
+          </Modal.Actions>
+        </Modal>
+        </div>
       )
     }
 }

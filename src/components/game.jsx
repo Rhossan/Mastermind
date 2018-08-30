@@ -90,6 +90,7 @@ class Game extends React.Component{
     });
 
     const winner =  JSON.stringify(pegs[pegs.length-1]) === JSON.stringify([2,2,2,2]);
+    const loser =  pegs.length === 10;
     return (
       <div>
 
@@ -117,11 +118,13 @@ class Game extends React.Component{
   </div>
 
         <div className={css(styles.formContainer)}>
-          <GuessForm props={this.props}/>
+            <GuessForm props={this.props}/>
           <Divider horizontal>More Options</Divider>
+          <div>
             <Button secondary onClick={this.resetGame}>Reset</Button>
-            <EndGameModal props={this.props} isWinner={winner}/>
             <LeaderBoardModal/>
+            <EndGameModal props={this.props} isWinner={winner} isLoser={loser}/>
+          </div>
           </div>
 
       </div>
@@ -176,7 +179,7 @@ const styles = StyleSheet.create({
     marginTop: '50px',
     marginLeft: '100px',
     marginRight: '100px'
-}
+  }
 
 });
 

@@ -69,6 +69,7 @@ class LeaderBoardModal extends React.Component {
 
         </Modal.Actions>
       </Modal>
+
     )
   }
 }
