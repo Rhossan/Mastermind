@@ -32,7 +32,6 @@ class GuessForm extends React.Component {
     let copySlot = slot.slice();
     let copyAnswer = this.props.props.answer.slice();
     let arr = [];
-    let correctLocations = 0;
     for (let i = 0; i < copySlot.length; i++) {
       if(copySlot[i] === (copyAnswer[i]).toString()) {
         copySlot[i] = -1
@@ -41,7 +40,7 @@ class GuessForm extends React.Component {
       }
     }
     for (let i = 0; i < copySlot.length; i++) {
-      if( (copySlot[i] != -1) && (copySlot.indexOf(copyAnswer[i].toString()) != -1) ) {
+      if( (copySlot[i] !== -1) && (copySlot.indexOf(copyAnswer[i].toString()) !== -1) ) {
         arr.push(1);
       }
     }
@@ -51,7 +50,7 @@ class GuessForm extends React.Component {
 
   submit = (e) => {
     e.preventDefault();
-    if(this.state.value.length != 4){
+    if(this.state.value.length !== 4){
       this.setState({tryAgainBool: true})
     }
     else{
@@ -92,8 +91,11 @@ class GuessForm extends React.Component {
          options={options}
          value={this.state.value} />
        <Divider horizontal>----</Divider>
-       <Button primary onClick={this.submit}>Guess</Button>
-       <TutorialModal />
+       <div className={css(styles.buttonContainer)}>
+         <Button primary onClick={this.submit}>Guess</Button>
+         <TutorialModal />
+       </div>
+
 
         <Modal open={this.state.tryAgainBool} basic size='small'>
           <Header icon='time' content='Try Again' />
@@ -112,5 +114,11 @@ class GuessForm extends React.Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  buttonContainer: {
+    display:'flex'
+
+  }
+})
 
 export default GuessForm;

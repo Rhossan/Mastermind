@@ -6,7 +6,7 @@ import BlackSquare from "../assets/black-square.png";
 import RedSquare from "../assets/red-square.png";
 
 import { StyleSheet, css } from "aphrodite";
-import { Button, Divider, Header, Icon, Image, Table, Label, Form, Modal } from 'semantic-ui-react'
+import { Button, Divider, Header, Icon, Image, Table, Label } from 'semantic-ui-react'
 
 
 class Game extends React.Component{
@@ -56,7 +56,6 @@ class Game extends React.Component{
     }
 
     getPegLabels = (peg) => {
-      debugger
       const color = {
         2: RedSquare,
         1: BlackSquare
@@ -71,14 +70,14 @@ class Game extends React.Component{
       return label;
     }
   render() {
-    const {slots, pegs} = this.props.guesses;
+    const {pegs} = this.props.guesses;
 
     let mappings = this.mapEachTurn();
 
     const guesses = mappings.map((guess, idx) => {
       return (
         <Table.Row>
-          <Table.Cell>
+          <Table.Cell key={idx}>
             {this.getLabel(guess.slot)}
           </Table.Cell>
           <Table.Cell>
@@ -118,7 +117,11 @@ class Game extends React.Component{
   </div>
 
         <div className={css(styles.formContainer)}>
+          <div className={css(styles.buttonContainer)}>
             <GuessForm props={this.props}/>
+
+          </div>
+
           <Divider horizontal>More Options</Divider>
           <div>
             <Button secondary onClick={this.resetGame}>Reset</Button>
@@ -179,7 +182,10 @@ const styles = StyleSheet.create({
     marginTop: '50px',
     marginLeft: '100px',
     marginRight: '100px'
-  }
+  },
+    buttonContainer: {
+      display:'inline-block'
+    }
 
 });
 

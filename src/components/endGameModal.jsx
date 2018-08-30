@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Icon, Form, Modal } from 'semantic-ui-react'
+import { Header, Form, Modal } from 'semantic-ui-react'
 import fire from '../fire';
 
 class EndGameModal extends React.Component{

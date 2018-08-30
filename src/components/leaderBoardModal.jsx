@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Icon, Image, Table, Label, Form, Modal } from 'semantic-ui-react'
+import { Button, Header, Icon, Table, Modal } from 'semantic-ui-react'
 import fire from '../fire';
 import { StyleSheet, css } from 'aphrodite';
 
@@ -24,10 +24,9 @@ class LeaderBoardModal extends React.Component {
     let scores = this.state.scores.sort((a,b) => {
       return a.score[0] - b.score[0];
     })
-    debugger
     scores = scores.map((score,idx) => {
       return (
-        <Table.Row>
+        <Table.Row key={idx}>
           <Table.Cell>{idx + 1}</Table.Cell>
           <Table.Cell>{score.username}</Table.Cell>
           <Table.Cell>{score.score[0]}</Table.Cell>
