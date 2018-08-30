@@ -3,7 +3,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import Mastermind from "../assets/mastermind.jpg";
 
 const TutorialModal = () => (
-  <Modal trigger={<Button color='green'>tutorial</Button>} centered={false}>
+  <Modal trigger={<Button color='green'>Tutorial</Button>} centered={false}>
     <Modal.Header>Welcome to Mastermind, the hottest game on the web!</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src={Mastermind} />

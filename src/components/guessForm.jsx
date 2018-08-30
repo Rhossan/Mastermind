@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dropdown, Divider } from 'semantic-ui-react';
+import { Button, Dropdown, Divider, Modal, Header, Form } from 'semantic-ui-react';
 import TutorialModal from "./tutorialModal";
 
 import { StyleSheet, css } from "aphrodite";
@@ -8,7 +8,8 @@ class GuessForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: []
+      value: [],
+      tryAgainBool: false
     };
   this.update = this.update.bind(this);
   this.submit = this.submit.bind(this);
@@ -22,7 +23,8 @@ class GuessForm extends React.Component {
 
   resetState = () => {
     this.setState({
-      value: []
+      value: [],
+      tryAgainBool: false
     })
   }
 
@@ -50,7 +52,7 @@ class GuessForm extends React.Component {
   submit = (e) => {
     e.preventDefault();
     if(this.state.value.length != 4){
-      
+      this.setState({tryAgainBool: true})
     }
     else{
       const pegs = this.determinePegs(this.state.value)
@@ -92,6 +94,20 @@ class GuessForm extends React.Component {
        <Divider horizontal>----</Divider>
        <Button primary onClick={this.submit}>Guess</Button>
        <TutorialModal />
+
+        <Modal open={this.state.tryAgainBool} basic size='small'>
+          <Header icon='time' content='Try Again' />
+          <Modal.Content>
+            <p>
+              Make sure you pick four numbers from the dropdown!
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Form>
+              <Form.Button color='olive' inverted onClick= {this.resetState}>Try Again</Form.Button>
+            </Form>
+          </Modal.Actions>
+        </Modal>
       </div>
     );
   }
